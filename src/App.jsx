@@ -2,6 +2,7 @@ import Admin from "./Admin";
 import "./App.css";
 import Login from "./Login";
 import MyButton from "./MyButton";
+import RenderingLists from "./RenderingLists";
 
 function App() {
   // const user = {
@@ -10,7 +11,7 @@ function App() {
   //   imgSize: 90,
   // };
 
-  const isLoggedin = true;
+  // const isLoggedin = true;
 
   return (
     <>
@@ -22,13 +23,15 @@ function App() {
         style={{ width: user.imgSize, height: user.imgSize }}
       /> */}
 
-      {
+      {/* {
         isLoggedin ? <Admin/> : <Login />
-      }
+      } */}
 
       {/* {
         isLoggedin && <Admin/>
       } */}
+
+      <RenderingLists/>
     </>
   );
 }
