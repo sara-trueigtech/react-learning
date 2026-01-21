@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Admin from "./Admin";
 import "./App.css";
 import Login from "./Login";
@@ -5,33 +6,17 @@ import MyButton from "./MyButton";
 import RenderingLists from "./RenderingLists";
 
 function App() {
-  const user = {
-    imgUrl: "https://i.imgur.com/yXOvdOS.jpg",
-    name: "sara",
-    imgSize: 90,
-  };
+  const [count, setCount] = useState(0);
 
-  // const isLoggedin = true;
-
+  function handleClick() {
+    setCount(count + 1);
+  }
   return (
     <>
-      <h1 className="name">{user.name}</h1>
-      <MyButton />
-      <img
-        src={user.imgUrl}
-        alt={"photo of" + user.name}
-        style={{ width: user.imgSize, height: user.imgSize }}
-      />
-
-      {/* {
-        isLoggedin ? <Admin/> : <Login />
-      } */}
-
-      {/* {
-        isLoggedin && <Admin/>
-      } */}
-
-      <RenderingLists/>
+      <h1 className="name">sara</h1>
+      <MyButton count = {count} onClick = {handleClick} />
+      <MyButton count = {count} onClick = {handleClick} />
+      {/* <RenderingLists/> */}
     </>
   );
 }
