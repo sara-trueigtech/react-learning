@@ -26,16 +26,14 @@ class Test extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <h1>
           Hello {this.state.name}
         </h1>
-        <h2>
-          <a onClick={this.changeState.bind(this)}>
+          <button onClick={this.changeState.bind(this)}>
             click
-          </a>
-        </h2>
-      </div>
+          </button>
+      </>
     );
   }
 }
