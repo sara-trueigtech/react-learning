@@ -28,11 +28,11 @@ class Test extends React.Component {
     return (
       <div>
         <h1>
-          GeeksForGeeks.org, Hello {this.state.name}
+          Hello {this.state.name}
         </h1>
         <h2>
           <a onClick={this.changeState.bind(this)}>
-            Press Here!
+            click
           </a>
         </h2>
       </div>
