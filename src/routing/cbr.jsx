@@ -5,6 +5,7 @@ import Services from "./Services";
 import Layout from "./Layout";
 import ErrorElement from "./ErrorElement";
 import NotFound from "./NotFound";
+import Profile from "./Profile";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       { path: "about", element: <About /> },
       { path: "services", element: <Services /> },
     ],
+  },
+  {
+    path:"/profile/:id",
+    element:<Profile/>
   },
   {
     path: "*",
