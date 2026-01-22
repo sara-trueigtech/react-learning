@@ -1,28 +1,33 @@
 import React from "react";
 
 const Forms = () => {
+
+  const search = (formData) => {
+    const data = formData.get("data");
+    alert(`you searched for ${data}`);
+  }
+
   return (
     <>
       {/* data is sent with a get method in url */}
-      <form method="get">
+      {/* <form method="get">
         <label>
           get name
           <input type="text" name="inputted-name" />
         </label>
         <button>save</button>
-      </form>
+      </form> */}
 
       {/* data sent a post request in the request body to the server*/}
-      <form method="post">
-        <label>
-          post name
+      {/* <form method="post">
+        <label>post name
           <input type="text" name="posted-name" />
         </label>
         <button>save</button>
-      </form>
+      </form> */}
 
       {/* Form with fieldset, legend, and label */}
-      <form method="post">
+      {/* <form method="post">
         <fieldset>
           <legend>do you agree???</legend>
           <label>
@@ -34,16 +39,21 @@ const Forms = () => {
             no
           </label>
         </fieldset>
-      </form>
+      </form> */}
 
       {/* When the form is inside a <dialog>, closes the dialog and causes a submit event to be fired on submission, without submitting data or clearing the form. */}
-      <dialog open>
+      {/* <dialog open>
         <form method="dialog">
           <legend>Do you agree?</legend>
           <button>OK</button>
           <button>no</button>
         </form>
-      </dialog>
+      </dialog> */}
+
+      <form action={search} >
+        <input type="text" name="data"/>
+        <button type="submit">search</button>
+      </form>
     </>
   );
 };
