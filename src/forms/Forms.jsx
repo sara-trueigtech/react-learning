@@ -1,23 +1,50 @@
-import React, { useActionState } from "react";
+import React, {
+  useOptimistic,
+  useState,
+  startTransition
+} from "react";
 
 const Forms = () => {
-  // async function formAct(curstate, formData)
-  // {
-  //   await new Promise((resolve) => setTimeout(resolve, 2000));
-  //   return "donedanand";
-  // }
-  function inc(curState, formData)
-  {
-    return curState + 1;
+  const [messages, setMessages] = useState([]);
+
+  async function sendMsg(text) {
+    await new Promise(res => setTimeout(res, 2000));
   }
 
-  // const [state, action, pending] = useActionState(formAct, null);
-  const [state, action, pending] = useActionState(inc, 0);
+  const [optMsg, addOptMsg] = useOptimistic(
+    messages,
+    (state, newMsg) => [...state, newMsg]
+  );
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const text = e.target.message.value;
+    e.target.reset();
+
+    // ✅ optimistic update MUST be in a transition
+    startTransition(() => {
+      addOptMsg({ text, sending: true });
+    });
+
+    await sendMsg(text);
+
+    setMessages(prev => [...prev, { text, sending: false }]);
+  }
 
   return (
     <>
-      <form action={action}>
-        <button type="submit">{state}</button>
+      <ul>
+        {optMsg.map((m, i) => (
+          <li key={i}>
+            {m.text} {m.sending && "sending"}
+          </li>
+        ))}
+      </ul>
+
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="message" />
+        <button>Send</button>
       </form>
     </>
   );
