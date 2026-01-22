@@ -1,73 +1,19 @@
-import React from "react";
+import React, { useActionState } from "react";
 
-const Forms = ({prodId}) => {
-
-  const serverFuntion = (prodId, formData) => {
-    'use server'
-    const product = formData.get("product");
-    // const prodId = formData.get("prodId");
-    console.log("product is : ", product, "with Id = ", prodId );
+const Forms = () => {
+  async function formAct(curstate, formData)
+  {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    return "donedanand";
   }
 
-  const serverFuncBind = serverFuntion.bind(null, prodId);
-
-  // const search = (formData) => {
-  //   const data = formData.get("data");
-  //   alert(`you searched for ${data}`);
-  // }
+  const [state, action, pending] = useActionState(formAct, null);
 
   return (
     <>
-      {/* data is sent with a get method in url */}
-      {/* <form method="get">
-        <label>
-          get name
-          <input type="text" name="inputted-name" />
-        </label>
-        <button>save</button>
-      </form> */}
-
-      {/* data sent a post request in the request body to the server*/}
-      {/* <form method="post">
-        <label>post name
-          <input type="text" name="posted-name" />
-        </label>
-        <button>save</button>
-      </form> */}
-
-      {/* Form with fieldset, legend, and label */}
-      {/* <form method="post">
-        <fieldset>
-          <legend>do you agree???</legend>
-          <label>
-            <input type="radio" name="radio" value="yes" />
-            yes
-          </label>
-          <label>
-            <input type="radio" name="radio" value="no" />
-            no
-          </label>
-        </fieldset>
-      </form> */}
-
-      {/* When the form is inside a <dialog>, closes the dialog and causes a submit event to be fired on submission, without submitting data or clearing the form. */}
-      {/* <dialog open>
-        <form method="dialog">
-          <legend>Do you agree?</legend>
-          <button>OK</button>
-          <button>no</button>
-        </form>
-      </dialog> */}
-
-      {/* <form action={search} >
-        <input type="text" name="data"/>
-        <button type="submit">search</button>
-      </form> */}
-
-      <form action={serverFuncBind}>
-        {/* <input type="hidden" name="prodId" value={prodId} /> */}
-        <input type="text" name="product"/>
-        <button type="submit">submit</button>
+      <form action={action}>
+        <input type="text" />
+        <button type="submit" disabled={pending}>{pending ? "submitting" : "submiot"}</button>
       </form>
     </>
   );
