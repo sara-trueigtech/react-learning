@@ -1,17 +1,27 @@
+import { useActionState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 const Forms = () => {
-  function search() {
-    throw new Error("search error");
+
+  function formAct(curState, formData){
+    'use server';
+    const email = formData.get("email");
+
+    if (!email.includes("@")) {
+      return "Please enter a valid email";
+    }
+
+    return null;
   }
+
+  const [state, action] = useActionState(formAct, null);
   return (
     <>
-      <ErrorBoundary fallback={<p>errorrr occurred</p>}>
-        <form action={search}>
-          <input type="text" name="message" />
-          <button type="submit">Send</button>
-        </form>
-      </ErrorBoundary>
+      <form action={action}>
+        <input type="text" name="email"/>
+        <button>submit</button>
+        {!!state && <p>{state}</p>}
+      </form>
     </>
   );
 };
