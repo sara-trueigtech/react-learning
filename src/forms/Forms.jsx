@@ -2,25 +2,22 @@ import { useActionState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 const Forms = () => {
-
-  function formAct(curState, formData){
-    'use server';
-    const email = formData.get("email");
-
-    if (!email.includes("@")) {
-      return "Please enter a valid email";
-    }
-
-    return null;
+  function publish(formData)
+  {
+    alert("form sbmit through publish btn");
   }
+  function draft(formData)
+  {
+    alert("form sbmit through draft btn");
+  }
+  
 
-  const [state, action] = useActionState(formAct, null);
   return (
     <>
-      <form action={action}>
-        <input type="text" name="email"/>
-        <button>submit</button>
-        {!!state && <p>{state}</p>}
+      <form action={draft}>
+        <input type="text" name="article"/>
+        <button type="submit">draft</button>
+        <button formAction={publish}>publish</button>
       </form>
     </>
   );
