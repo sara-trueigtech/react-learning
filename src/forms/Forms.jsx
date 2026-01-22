@@ -1,11 +1,20 @@
 import React from "react";
 
-const Forms = () => {
+const Forms = ({prodId}) => {
 
-  const search = (formData) => {
-    const data = formData.get("data");
-    alert(`you searched for ${data}`);
+  const serverFuntion = (prodId, formData) => {
+    'use server'
+    const product = formData.get("product");
+    // const prodId = formData.get("prodId");
+    console.log("product is : ", product, "with Id = ", prodId );
   }
+
+  const serverFuncBind = serverFuntion.bind(null, prodId);
+
+  // const search = (formData) => {
+  //   const data = formData.get("data");
+  //   alert(`you searched for ${data}`);
+  // }
 
   return (
     <>
@@ -50,9 +59,15 @@ const Forms = () => {
         </form>
       </dialog> */}
 
-      <form action={search} >
+      {/* <form action={search} >
         <input type="text" name="data"/>
         <button type="submit">search</button>
+      </form> */}
+
+      <form action={serverFuncBind}>
+        {/* <input type="hidden" name="prodId" value={prodId} /> */}
+        <input type="text" name="product"/>
+        <button type="submit">submit</button>
       </form>
     </>
   );
