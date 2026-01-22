@@ -1,18 +1,13 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, RouterProvider, Routes } from "react-router-dom";
 import About from "./routing/About";
 import Home from "./routing/Home";
 import Services from "./routing/Services";
+import router from "./routing/cbr.jsx";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/services" element={<Services/>} />
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={router}/>
     </>
   );
 }
