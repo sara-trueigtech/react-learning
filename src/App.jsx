@@ -1,9 +1,10 @@
-import Hello from "./component composition/Hello";
+import Forms from "./forms/Forms";
+
 
 function App() {
   return (
     <>
-      <Hello text="sara" />
+      <Forms/>
     </>
   );
 }
