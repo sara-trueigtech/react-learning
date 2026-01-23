@@ -6,26 +6,37 @@ import Layout from "./Layout";
 import ErrorElement from "./ErrorElement";
 import NotFound from "./NotFound";
 import Profile from "./Profile";
+import ProtectedRoutes from "./ProtectedRoutes";
+import Login from "./Login";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
-    errorElement:<ErrorElement/>,
+    element: <ProtectedRoutes />,
+    errorElement: <ErrorElement />,
     children: [
-      { index: true, element: <Home /> },
-      { path: "about", element: <About /> },
-      { path: "services", element: <Services /> },
+      {
+        element: <Layout />,
+        children: [
+          { index: true, element: <Home /> },
+          { path: "/about", element: <About /> },
+          { path: "services", element: <Services /> },
+        ],
+      },
+      {
+        path: "profile/:id",
+        element: <Profile />,
+      },
     ],
   },
   {
-    path:"/profile/:id",
-    element:<Profile/>
+    path: "login",
+    element: <Login/>
   },
   {
     path: "*",
-    element: <NotFound/>,
-  }
+    element: <NotFound />,
+  },
 ]);
 
 export default router;
