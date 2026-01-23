@@ -3,12 +3,13 @@ import { Link, replace, useNavigate } from "react-router-dom";
 
 const Home = () => {
   const nav = useNavigate();
+  const role = localStorage.getItem("role");
   const [isLoggedin, setIsLoggedin] = useState(
     Boolean(localStorage.getItem("token")),
   );
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     setIsLoggedin(false);
     nav("/login", { replace: true });
   };
@@ -22,6 +23,7 @@ const Home = () => {
         <Link to="/services">
           <button>services</button>
         </Link>
+        {role === "admin" && <Link to="/admin"><button>admin</button></Link>}
         {isLoggedin ? (
           <button onClick={handleLogout}>Logout</button>
         ) : (

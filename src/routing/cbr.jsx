@@ -8,6 +8,9 @@ import NotFound from "./NotFound";
 import Profile from "./Profile";
 import ProtectedRoutes from "./ProtectedRoutes";
 import Login from "./Login";
+import RoleProtectedRoutes from "./RoleProtectedRoutes";
+import Admin from "./Admin";
+import Unauth from "../Unauth";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +24,15 @@ const router = createBrowserRouter([
           { index: true, element: <Home /> },
           { path: "/about", element: <About /> },
           { path: "services", element: <Services /> },
+          {
+            element: <RoleProtectedRoutes allowed={["admin"]} />,
+            children: [
+              {
+                path: "admin",
+                element: <Admin />,
+              },
+            ],
+          },
         ],
       },
       {
@@ -31,7 +43,11 @@ const router = createBrowserRouter([
   },
   {
     path: "login",
-    element: <Login/>
+    element: <Login />,
+  },
+  {
+    path: "/unauthorised",
+    element: <Unauth />,
   },
   {
     path: "*",
