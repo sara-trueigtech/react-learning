@@ -11,6 +11,7 @@ import Login from "./Login";
 import RoleProtectedRoutes from "./RoleProtectedRoutes";
 import Admin from "./Admin";
 import Unauth from "../Unauth";
+import UserProvider from "../context API/UserProvider";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorElement />,
     children: [
       {
-        element: <Layout />,
+        element: (
+          <UserProvider>
+            <Layout />
+          </UserProvider>
+        ),
         children: [
           { index: true, element: <Home /> },
           { path: "/about", element: <About /> },
